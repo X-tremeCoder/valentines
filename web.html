@@ -362,7 +362,7 @@
                 countdownTextElement.textContent = "";
                 unlockButton.disabled = false;  // Enable for past or today
             } else {
-                countdownElement.textContent = `Time left: ${Math.floor(timeDiff / (1000 * 60 * 60 * 24))} days ${Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))} hours ${Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60))} minutes`;
+                countdownElement.textContent = `Time left: ${Math.floor(timeDiff / (1000 * 60 * 60 * 24))} days ${Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))} hours ${Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60))} minutes ${Math.floor((timeDiff % (1000 * 60)) / 1000)} seconds`;
                 countdownTextElement.textContent = `Time until ${messageDate.toLocaleDateString()}`;
                 unlockButton.disabled = true; // Disable until midnight on the date
             }
