@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Celebration</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff1493;
+            --secondary: #ff69b4;
+            --accent: #ffd1dc;
+            --dark: #800020;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(45deg, var(--accent), #fff5f6);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .landing {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, var(--accent) 0%, var(--dark) 100%);
+            z-index: 1000;
+            transition: transform 1s ease-in-out;
+        }
+
+        .landing.hidden {
+            transform: translateY(-100%);
+        }
+
+        .enter-btn {
+            padding: 20px 40px;
+            font-size: 24px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+            transition: transform 0.3s;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .enter-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            justify-items: center;
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            background-color: rgba(255,255,255,0.8);
+        }
+
+        .card {
+            width: 100%;
+            max-width: 300px;
+            background: rgba(255,255,255,0.9);
+            border: 3px solid var(--primary);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: scale(1.05) rotate3d(1, 1, 0, 15deg);
+            box-shadow: 0 15px 30px rgba(255,20,147,0.3);
+        }
+
+        .card::before {
+            content: '❤️';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            font-size: 40px;
+            opacity: 0.5;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .card::after {
+            content: '❤️';
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 40px;
+            opacity: 0.5;
+            animation: float 3s ease-in-out infinite reverse;
+        }
+
+        .day-title {
+            color: var(--primary);
+            font-size: 24px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .day-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.5s;
+        }
+
+        .day-image:hover {
+            transform: scale(1.1);
+        }
+
+        .card .unlock-btn {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 15px 0;
+            transition: all 0.3s;
+        }
+
+        .card .unlock-btn:hover:not(:disabled) {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255,20,147,0.3);
+        }
+
+        .countdown {
+            color: var(--dark);
+            font-size: 18px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .countdown-text {
+            color: var(--primary);
+            font-size: 16px;
+            margin-top: 10px;
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(10px, -10px) rotate(10deg); }
+        }
+
+        .full-view {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.5s ease;
+        }
+
+        .full-view.active {
+            display: flex;
+        }
+
+        .full-view-content {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        #fullImage {
+            width: 100%;
+            height: 350px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            background: #ff1493;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="landing" id="landing">
+        <button class="enter-btn" onclick="startJourney()">ഇളിച്ചോണ്ട്‌ നിൽക്കാതെ അങ്ങ് തുറക്ക് മറിയാമേ </button>
+    </div>
+
+    <div class="container" id="container"></div>
+
+    <!-- Full View Popup -->
+    <div id="fullView" class="full-view">
+        <div class="full-view-content">
+            <h2 id="fullDayTitle" class="day-title"></h2>
+            <img id="fullImage" src="" alt="" class="day-image">
+            <p id="fullMessage" class="message"></p>
+            <button class="close-btn" onclick="closeFullView()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        let audio = new Audio("audio.mp3");
+        audio.volume = 0.05;
+        audio.play();
+
+        window.onload = function() {
+            audio.play();
+        };
+
+        function fadeOutAudio() {
+            const fadeOutDuration = 1000;
+            let fadeOutInterval = setInterval(function() {
+                if (audio.volume > 0) {
+                    audio.volume -= 0.1;
+                } else {
+                    clearInterval(fadeOutInterval);
+                    audio.pause();
+                }
+            }, fadeOutDuration / 20);
+        }
+
+        const valentineData = [
+            {
+                date: '2025-02-07',
+                day: 'Rose Day',
+                message: "Happy Rose Day! Your glow is like the soft shine of a rose in bloom, and just like a rose in a garden, you stand out with your beauty and charm. You make everything around you feel brighter.♥️",
+                image: "roseday.jpg"
+            },
+            {
+                date: '2025-02-08',
+                day: 'Propose Day',
+                message: "Every moment with you feels like falling in love all over again.",
+                image: "proposeday.jpg"
+            },
+            {
+                date: '2025-02-09',
+                day: 'Chocolate Day',
+                message: "Sweet like chocolate, pure like your heart - you're everything I've ever wanted.",
+                image: "chocolateday.jpg"
+            },
+            {
+                date: '2025-02-10',
+                day: 'Teddy Day',
+                message: "Just like a teddy bear brings comfort and joy, you bring warmth to my life.",
+                image: "teddy.jpg"
+            },
+            {
+                date: '2025-02-11',
+                day: 'Promise Day',
+                message: "I promise to stand by you through thick and thin, loving you unconditionally.",
+                image: "promise.jpg"
+            },
+            {
+                date: '2025-02-12',
+                day: 'Hug Day',
+                message: "Your hugs are my safe haven, where all my worries melt away.",
+                image: "hug.jpg"
+            },
+            {
+                date: '2025-02-13',
+                day: 'Kiss Day',
+                message: "Every kiss with you feels like our first - magical and passionate.",
+                image: "kiss.jpg"
+            },
+            {
+                date: '2025-02-14',
+                day: "Valentine's Day",
+                message: "You're my soulmate, my best friend, and my greatest blessing.",
+                image: "valentine.jpg"
+            }
+        ];
+
+        function startJourney() {
+            document.getElementById('landing').classList.add('hidden');
+            createSparkles();
+            createCards();
+        }
+
+        function createSparkles() {
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = Math.random() * window.innerWidth + 'px';
+                    sparkle.style.top = Math.random() * window.innerHeight + 'px';
+                    sparkle.innerHTML = '✨';
+                    document.body.appendChild(sparkle);
+                    setTimeout(() => sparkle.remove(), 1000);
+                }, i * 100);
+            }
+        }
+
+        function createCards() {
+            const container = document.getElementById('container');
+            const currentDate = new Date();
+            valentineData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card animate__animated animate__fadeIn';
+                const messageDate = new Date(item.date);
+                
+                const content = `
+                    <h2 class="day-title">${item.day}</h2>
+                    <img src="${item.image}" alt="${item.day}" class="day-image">
+                    <div class="countdown" id="countdown-${item.date}"></div>
+                    <button class="unlock-btn" id="unlock-${item.date}" onclick="showFullView('${item.date}')">Reveal</button>
+                    <p class="countdown-text" id="countdown-text-${item.date}"></p>
+                `;
+
+                card.innerHTML = content;
+                container.appendChild(card);
+                
+                // Calculate time difference to midnight on event day
+                updateCountdown(item.date, messageDate);
+            });
+        }
+
+        function updateCountdown(date, messageDate) {
+            const countdownElement = document.getElementById(`countdown-${date}`);
+            const countdownTextElement = document.getElementById(`countdown-text-${date}`);
+            const unlockButton = document.getElementById(`unlock-${date}`);
+            const currentDate = new Date();
+            const targetDate = new Date(date + ' 00:00:00');  // Midnight of the given date
+            const timeDiff = targetDate - currentDate;
+
+            if (timeDiff < 0) {
+                countdownElement.textContent = "Reveal Now";
+                countdownTextElement.textContent = "";
+                unlockButton.disabled = false;  // Enable for past or today
+            } else {
+                countdownElement.textContent = `Time left: ${Math.floor(timeDiff / (1000 * 60 * 60 * 24))} days ${Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))} hours ${Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60))} minutes`;
+                countdownTextElement.textContent = `Time until ${messageDate.toLocaleDateString()}`;
+                unlockButton.disabled = true; // Disable until midnight on the date
+            }
+        }
+
+        function showFullView(date) {
+            const event = valentineData.find(item => item.date === date);
+            const fullView = document.getElementById('fullView');
+            document.getElementById('fullDayTitle').textContent = event.day;
+            document.getElementById('fullImage').src = event.image;
+            document.getElementById('fullMessage').textContent = event.message;
+            fullView.classList.add('active');
+        }
+
+        function closeFullView() {
+            document.getElementById('fullView').classList.remove('active');
+            audio.pause();
+        }
+    </script>
+</body>
+</html>
