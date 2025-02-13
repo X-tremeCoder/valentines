@@ -249,18 +249,6 @@
                 console.log("Audio playback failed:", error);
             });
         }
-        function fadeOutAudio() {
-            const fadeOutDuration = 1000;
-            let fadeOutInterval = setInterval(function() {
-                if (audio.volume > 0) {
-                    audio.volume -= 0.1;
-                } else {
-                    clearInterval(fadeOutInterval);
-                    audio.pause();
-                }
-            }, fadeOutDuration / 20);
-        }
-
         const valentineData = [
             {
                 date: '2025-02-07',
