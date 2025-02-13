@@ -236,12 +236,19 @@
     <script>
         let audio = new Audio("https://drive.google.com/uc?export=download&id=1Z4eTypqpyhP-FgyhTHk7iWs49NXGYUps");
         audio.volume = 0.5;
-        audio.play();
-
-        window.onload = function() {
-            audio.play();
-        };
-
+        audio.loop = true;  // Add this line to make it loop continuously
+        
+        // Replace your startJourney function with this
+        function startJourney() {
+            document.getElementById('landing').classList.add('hidden');
+            createSparkles();
+            createCards();
+            
+            // Play audio with error handling
+            audio.play().catch(error => {
+                console.log("Audio playback failed:", error);
+            });
+        }
         function fadeOutAudio() {
             const fadeOutDuration = 1000;
             let fadeOutInterval = setInterval(function() {
