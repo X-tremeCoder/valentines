@@ -234,20 +234,23 @@
     </div>
 
     <script>
-        let audio = new Audio("https://drive.google.com/uc?export=download&id=1Z4eTypqpyhP-FgyhTHk7iWs49NXGYUps");
+        let audio = new Audio();
+        audio.src = "https://drive.google.com/u/0/uc?id=1Z4eTypqpyhP-FgyhTHk7iWs49NXGYUps&export=download";
         audio.volume = 0.5;
-        audio.loop = true;  // Add this line to make it loop continuously
+        audio.loop = true;
         
-        // Replace your startJourney function with this
+        window.onload = function() {
+            audio.load();  // Preload the audio
+        };
+        
+        // Keep your startJourney function, just add the play() inside it:
         function startJourney() {
             document.getElementById('landing').classList.add('hidden');
             createSparkles();
             createCards();
             
-            // Play audio with error handling
-            audio.play().catch(error => {
-                console.log("Audio playback failed:", error);
-            });
+            // Add this line to your existing startJourney function
+            audio.play();
         }
         const valentineData = [
             {
