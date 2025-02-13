@@ -237,6 +237,18 @@
         let audio = new Audio("https://github.com/X-tremeCoder/valentines/audio.mp3");
         audio.volume = 0.5;
         audio.play();
+        
+        function startJourney() {
+            // Play audio after user clicks button
+            let audio = new Audio("https://raw.githubusercontent.com/X-tremeCoder/valentines/main/audio.mp3");
+            audio.volume = 0.05;
+            audio.play();  // Play the audio after the user interaction
+        
+            // Now hide the landing section and start the journey
+            document.getElementById('landing').classList.add('hidden');
+            createSparkles();
+            createCards();
+        }
 
         window.onload = function() {
             audio.play();
@@ -298,12 +310,6 @@
                 image: "valentine.jpg"
             }
         ];
-
-        function startJourney() {
-            document.getElementById('landing').classList.add('hidden');
-            createSparkles();
-            createCards();
-        }
 
         function createSparkles() {
             for (let i = 0; i < 50; i++) {
