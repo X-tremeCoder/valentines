@@ -234,24 +234,26 @@
     </div>
 
     <script>
-        let audio = new Audio();
-        audio.src = "https://drive.google.com/u/0/uc?id=1Z4eTypqpyhP-FgyhTHk7iWs49NXGYUps&export=download";
-        audio.volume = 0.5;
-        audio.loop = true;
-        
+        let audio = new Audio("https://github.com/X-tremeCoder/valentines/audio.mp3");
+        audio.volume = 0.05;
+        audio.play();
+
         window.onload = function() {
-            audio.load();  // Preload the audio
-        };
-        
-        // Keep your startJourney function, just add the play() inside it:
-        function startJourney() {
-            document.getElementById('landing').classList.add('hidden');
-            createSparkles();
-            createCards();
-            
-            // Add this line to your existing startJourney function
             audio.play();
+        };
+
+        function fadeOutAudio() {
+            const fadeOutDuration = 1000;
+            let fadeOutInterval = setInterval(function() {
+                if (audio.volume > 0) {
+                    audio.volume -= 0.1;
+                } else {
+                    clearInterval(fadeOutInterval);
+                    audio.pause();
+                }
+            }, fadeOutDuration / 20);
         }
+
         const valentineData = [
             {
                 date: '2025-02-07',
@@ -279,12 +281,6 @@
             },
             {
                 date: '2025-02-11',
-                day: 'Promise Day',
-                message: "Whatever shit happens, even lokathinte eeth moolak aahnelum I ll be there for you and i promise that i ll stay the same and i ll make sure that we stay the same 🫂♥️ upgradation aayikoodannila bhaviyil😌........Eth mood 😎.........Nammade mood 🤜🏻🤛🏻",
-                image: "promise.jpg"
-            },
-            {
-                date: '2025-02-12',
                 day: 'Hug Day',
                 message: "Order Details:\n\nAddress:  \n\nMariya T Thomas \nAmity University Gurgaon, Manesar, Panchgaon  \nPanchgaon, Manesar  \nMANESAR, HARYANA 122413  \nIndia  \n\nPhone number: ‪‬  8848233045‬\n\nYour special order: A big serving of warm, cozy hugs, paired with a delicious side of sweet kisses, all sprinkled with extra love on top! ♥️\n\nOrder Status : Waiting for Mariya T Thomas to confirm.",
                 image: "hug.jpg"
@@ -292,7 +288,7 @@
             {
                 date: '2025-02-13',
                 day: 'Kiss Day',
-                message: "Order is still waiting for confirmation!!!! Kiss dayokke veno ente mariyammak oru umma theran. Ennu thannalum nink feel kitullaloo🙂‍↔️ Athond order accept cheytha hugum feelum kissum ellam orumich verum combo offeraaa😌.....Ennatum feel kitileee. Ninte feelinte sunapi adich poinnu kootikoo😂😂♥️......Mmuuuuahhhhhhhh♥️♥️ Chuckabooo♥️",
+                message: "Every kiss with you feels like our first - magical and passionate.",
                 image: "kiss.jpg"
             },
             {
