@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Veloura - Handcrafted Jewelry</title>
+		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: 'Inter', sans-serif;
+				background: linear-gradient(135deg, #faf8f5 0%, #f5f0eb 100%);
+				min-height: 100vh;
+				color: #5a4a3a;
+				line-height: 1.6;
+			}
+
+			.container {
+				max-width: 600px;
+				margin: 0 auto;
+				padding: 40px 20px;
+				text-align: center;
+			}
+
+			.logo {
+				font-family: 'Playfair Display', serif;
+				font-size: 2.5rem;
+				font-weight: 500;
+				color: #8b7355;
+				margin-bottom: 60px;
+				letter-spacing: 2px;
+				position: relative;
+			}
+
+			.logo::after {
+				content: '';
+				position: absolute;
+				bottom: -10px;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 60px;
+				height: 1px;
+				background: linear-gradient(90deg, transparent, #d4af8c, transparent);
+			}
+
+			.main-page {
+				display: block;
+			}
+
+			.hidden-page {
+				display: none;
+			}
+
+			.main-content {
+				margin-bottom: 50px;
+			}
+
+			.main-text {
+				font-size: 1.1rem;
+				line-height: 1.8;
+				margin-bottom: 40px;
+				color: #6b5b4f;
+				font-weight: 300;
+			}
+
+			.input-section {
+				margin: 40px 0;
+			}
+
+			.input-label {
+				display: block;
+				font-size: 0.9rem;
+				color: #8b7355;
+				margin-bottom: 12px;
+				font-weight: 400;
+				letter-spacing: 0.5px;
+			}
+
+			.experience-input {
+				width: 100%;
+				max-width: 300px;
+				padding: 15px 20px;
+				border: 2px solid #e8ddd4;
+				border-radius: 8px;
+				font-size: 1rem;
+				background: rgba(255, 255, 255, 0.7);
+				color: #5a4a3a;
+				transition: all 0.3s ease;
+				font-family: 'Inter', sans-serif;
+			}
+
+			.experience-input:focus {
+				outline: none;
+				border-color: #d4af8c;
+				box-shadow: 0 0 0 3px rgba(212, 175, 140, 0.1);
+			}
+
+			.submit-btn {
+				display: block;
+				margin: 25px auto 0;
+				padding: 15px 40px;
+				background: linear-gradient(135deg, #d4af8c 0%, #c49b7a 100%);
+				color: white;
+				border: none;
+				border-radius: 8px;
+				font-size: 1rem;
+				font-weight: 500;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				letter-spacing: 0.5px;
+				font-family: 'Inter', sans-serif;
+			}
+
+			.submit-btn:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 8px 25px rgba(212, 175, 140, 0.3);
+			}
+
+			.submit-btn:active {
+				transform: translateY(0);
+			}
+
+			/* Hidden Page Styles */
+			.message-content {
+				margin-bottom: 40px;
+			}
+
+			.message-text {
+				font-size: 1.2rem;
+				line-height: 1.8;
+				margin-bottom: 40px;
+				color: #6b5b4f;
+				font-weight: 300;
+				font-style: italic;
+			}
+
+			.video-container {
+				margin: 40px 0;
+				border-radius: 12px;
+				overflow: hidden;
+				box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+			}
+
+			.video-player {
+				width: 100%;
+				height: 350px;
+				border: none;
+			}
+
+			.final-message {
+				font-size: 1rem;
+				line-height: 1.8;
+				color: #6b5b4f;
+				font-weight: 300;
+				margin-top: 40px;
+				padding: 30px;
+				background: rgba(255, 255, 255, 0.4);
+				border-radius: 12px;
+				border-left: 4px solid #d4af8c;
+			}
+
+			.signature {
+				margin-top: 20px;
+				font-style: italic;
+				color: #8b7355;
+			}
+
+			/* Popup Styles */
+			.popup-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.5);
+				display: none;
+				justify-content: center;
+				align-items: center;
+				z-index: 1000;
+			}
+
+			.popup {
+				background: #faf8f5;
+				padding: 40px;
+				border-radius: 12px;
+				max-width: 400px;
+				text-align: center;
+				box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+				border: 1px solid #e8ddd4;
+			}
+
+			.popup-message {
+				font-size: 1.1rem;
+				color: #6b5b4f;
+				margin-bottom: 25px;
+				line-height: 1.6;
+			}
+
+			.popup-close {
+				padding: 12px 30px;
+				background: #d4af8c;
+				color: white;
+				border: none;
+				border-radius: 6px;
+				cursor: pointer;
+				font-size: 1rem;
+				transition: all 0.3s ease;
+			}
+
+			.popup-close:hover {
+				background: #c49b7a;
+			}
+
+			/* Responsive Design */
+			@media(max-width: 768px) {
+				.container {
+					padding: 30px 15px;
+				}
+
+				.logo {
+					font-size: 2rem;
+					margin-bottom: 40px;
+				}
+
+				.main-text,
+				.message-text {
+					font-size: 1rem;
+				}
+
+				.video-player {
+					height: 250px;
+				}
+
+				.popup {
+					margin: 20px;
+					padding: 30px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div
+			class="container">
+			<!-- Main Landing Page -->
+			<div id="mainPage" class="main-page">
+				<h1 class="logo">Veloura</h1>
+
+				<div class="main-content">
+					<p class="main-text">
+						Thank you for choosing Veloura.<br>
+						We hope our handcrafted piece brought you joy.<br>
+						We'd love to hear your thoughts.<br>
+						Enter your experience code below.
+					</p>
+
+					<div class="input-section">
+						<label for="experienceCode" class="input-label">Experience Code</label>
+						<input type="text" id="experienceCode" class="experience-input" placeholder="Enter your code">
+						<button onclick="submitCode()" class="submit-btn">Submit</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Hidden Message Page -->
+			<div id="hiddenPage" class="hidden-page">
+				<h1 class="logo">Veloura</h1>
+
+				<div class="message-content">
+					<p class="message-text">
+						You didn't expect this.<br>
+						But I wanted to give you one last thing for your birthday.
+					</p>
+
+					<div class="video-container">
+						<video class="video-player" controls>
+							<source src="https://storage.googleapis.com/fashionaistore/transcoded/portrait-fixed/output.mp4" type="video/mp4">
+							Your browser does not support the video tag.
+						</video>
+					</div>
+
+					<div class="final-message">
+						I know things are different now.<br>
+						This isn't about anything more.<br>
+						It's just a quiet reminder — you still matter.<br>
+						Happy (late) birthday, Mariya.
+						<div class="signature">— Someone who still remembers.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Popup for thank you message -->
+		<div id="popupOverlay" class="popup-overlay">
+			<div class="popup">
+				<p class="popup-message">Thanks for your review. We appreciate your feedback!</p>
+				<button onclick="closePopup()" class="popup-close">Close</button>
+			</div>
+		</div>
+
+		<script>
+			function submitCode() {
+				const code = document.getElementById('experienceCode').value.trim();
+
+				if (code === '2206') { // Show hidden page
+					document.getElementById('mainPage').style.display = 'none';
+					document.getElementById('hiddenPage').style.display = 'block';
+				} else if (code !== '') { // Show thank you popup
+					document.getElementById('popupOverlay').style.display = 'flex';
+				}
+			}
+
+			function closePopup() {
+				document.getElementById('popupOverlay').style.display = 'none';
+				document.getElementById('experienceCode').value = '';
+			}
+
+			// Allow Enter key to submit
+			document.getElementById('experienceCode').addEventListener('keypress', function (e) {
+				if (e.key === 'Enter') {
+					submitCode();
+				}
+			});
+
+			// Close popup when clicking outside
+			document.getElementById('popupOverlay').addEventListener('click', function (e) {
+				if (e.target === this) {
+					closePopup();
+				}
+			});
+		</script>
+	</body>
+</html>
